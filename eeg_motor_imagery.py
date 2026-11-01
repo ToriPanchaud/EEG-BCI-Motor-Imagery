@@ -30,7 +30,7 @@ group_parts = []
 for run, raw in zip(runs, raws):
     epochs = mne.Epochs(
         raw,
-        event_id=["hands", "feet"],
+        event_id=["hands", "feet"], # Choose the classes: ["hands", "feet"] or ["rest", "hands", "feet"]
         tmin=tmin,
         tmax=tmax,
         baseline=None,
@@ -47,7 +47,7 @@ y = np.concatenate(y_parts)
 groups = np.concatenate(group_parts)
 
 pipeline = Pipeline([
-    ("CSP", CSP(n_components=4, reg=None, log=True, norm_trace=False)),
+    ("CSP", CSP(n_components=4, reg=None, log=True, norm_trace=False)), # Change n_components to test different numbers of CSP components
     ("LDA", LinearDiscriminantAnalysis()),
 ])
 
