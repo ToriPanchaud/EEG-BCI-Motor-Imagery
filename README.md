@@ -13,6 +13,6 @@ The EEG signals are filtered between 7–30 Hz and evaluated using random train/
 
 Both results use leave-one-run-out cross-validation on subject 1, runs 6, 10 and 14.
 
-To reproduce an experiment, change the `event_id` and `n_components` parameters in the Python script.
+To reproduce an experiment, change the event_id and n_components parameters in the Python script.
 
 Built as part of my TKS Focus on neuroscience and brain-computer interfaces.
