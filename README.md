@@ -1,18 +1,19 @@
 # EEG Motor Imagery Classification
 
-A simple EEG motor imagery classification project using the PhysioNet EEG Motor Movement/Imagery Dataset.
+Python code accompanying my article *Can AI Decode What You're Imagining? I Tried to Find Out*, using the PhysioNet EEG Motor Movement/Imagery Dataset.
 
-The model uses Common Spatial Patterns (CSP) for feature extraction and Linear Discriminant Analysis (LDA) for classification.
+The V2 pipeline compares CSP + LDA, Minimum Distance to Mean, and Tangent Space + Logistic Regression, with Euclidean or Riemannian alignment.
 
-The EEG signals are filtered between 7–30 Hz and evaluated using random train/test splits and leave-one-run-out cross-validation.
+## Pipeline
 
-## Experiments
+1. `V2/download_data.py` — download runs 6, 10 and 14 for 109 subjects.
+2. `V2/preprocess_data.py` — filter at 7–30 Hz, resample to 160 Hz, and extract epochs from 1–2 seconds after each cue.
+3. `V2/run_experiments.py` — train, evaluate and export balanced accuracy.
 
-- Hands vs Feet: 95.54% mean balanced accuracy (4 CSP components).
-- Rest vs Hands vs Feet: 57.28% mean balanced accuracy (8 CSP components).
+Install `requirements.txt` with Python 3.11, then run the scripts in this order. Experiment settings are at the bottom of `run_experiments.py`.
 
-Both results use leave-one-run-out cross-validation on subject 1, runs 6, 10 and 14.
+The current default evaluates MDM and TS + LR, with and without RA, on 10 subjects and three classes. Run 6 provides labeled calibration; runs 10 and 14 are used for testing.
 
-To reproduce an experiment, change the event_id and n_components parameters in the Python script.
+This minimal version covers the basic pipeline. It does not reproduce all results in the article.
 
 Built as part of my TKS Focus on neuroscience and brain-computer interfaces.
